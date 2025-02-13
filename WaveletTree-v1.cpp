@@ -63,7 +63,7 @@ struct WavTree {
             int newL = (l == 0) ? 0 : curr.mapLeft[l - 1], newR = curr.mapLeft[r] - 1;
             return quantile((p << 1) + 1, s, m, newL, newR, k);
         } else {
-            int newL = (l == 0) ? 0 : (l - 1 + 1 + curr.mapLeft[l - 1]), newR = (r + 1 - curr.mapLeft[r]) - 1;
+            int newL = (l == 0) ? 0 : (l - 1 + 1 - curr.mapLeft[l - 1]), newR = (r + 1 - curr.mapLeft[r]) - 1;
             return quantile((p << 1) + 2, m + 1, e, newL, newR, k - cntLeqM);
         }
     }
@@ -95,10 +95,12 @@ void test3() {
     assert(wavtree.quantile(0, 1, 10, 3, 6, 3) == 6);
     assert(wavtree.quantile(0, 1, 10, 5, 9, 5) == 10); 
     assert(wavtree.quantile(0, 1, 10, 5, 9, 3) == 5); 
+    assert(wavtree.quantile(0, 1, 10, 4, 8, 3) == 2); 
+
 
 }
 int main() {
     test1();
     test2();
-    //test3();
+    test3();
 }
